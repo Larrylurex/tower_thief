@@ -3,6 +3,7 @@
     <head>
         <meta charset=UTF-8>
         <title>Tomcat WebSocket Chat</title>
+        <script src="js/jquery-1.12.3.min.js"></script>
         <script src="js/main.js"></script>
     </head>
     <body>
@@ -11,11 +12,6 @@
         <button type="submit" id="sendButton" onClick="postToServer()">Send!</button>
         <button type="submit" id="sendButton" onClick="closeConnect()">End</button>
 		<canvas id="myCanvas" width="550px" height="350px"></canvas>
- 
-		<script>
-			var canvas = document.querySelector("#myCanvas");
-			var context = canvas.getContext("2d");
-			 
-		</script>
+
     </body>
 </html>
