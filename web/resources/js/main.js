@@ -37,13 +37,16 @@ function update(data) {
   points = JSON.parse(data.data);
     for (var prop in points) {
         var point = {
-        color: prop,
-        x: points[prop][0],
-        y: points[prop][1]
-    };
+            color: prop,
+            x: points[prop][0],
+            y: points[prop][1]
+        };
+                
+        context.beginPath();
         context.arc(point.x, point.y, 50, 0, 2 * Math.PI, true);  
         context.fillStyle = point.color;
         context.fill();    
+        context.closePath();
     }
     
 //    requestAnimationFrame(update);

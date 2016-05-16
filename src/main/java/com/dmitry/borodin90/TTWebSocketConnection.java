@@ -1,5 +1,6 @@
 package com.dmitry.borodin90;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -65,9 +66,7 @@ public class TTWebSocketConnection {
         for (TTWebSocketConnection client : connections) {
             try {
                 synchronized (client) {
-                    JSONObject msg = new JSONObject();
-                    msg.putAll(points);
-                    client.session.getBasicRemote().sendText(msg.toJSONString());
+                    client.session.getBasicRemote().sendText(createMessage());
                 }
             } catch (IOException e) {
                 System.out.println("Chat Error: Failed to send message to client");
@@ -82,5 +81,17 @@ public class TTWebSocketConnection {
                 //broadcast(message);
             }
         }
+    }
+
+    private static String createMessage() {
+        JSONObject obj =  new JSONObject();
+        for(String key: points.keySet()){
+            JSONArray array = new JSONArray();
+            Point point = points.get(key);
+            array.add(point.getX());
+            array.add(point.getY());
+            obj.put(key, array);
+        }
+        return obj.toJSONString();
     }
 }
